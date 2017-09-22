@@ -189,6 +189,11 @@ def server_manage(request,consum_id):
     server_list = Server.objects.all()
     username = request.session.get('username','')
     return render(request,"server_manage.html",{"user":username,"servers":server_list,"consumer":consumer})
+
+#新增客户平台
+@login_required
+def add_consumer(request):
+    return render(request,"add_consumer.html")
     
     
     
