@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <title>客户服务器</title>
+<style>
+.col-md-6{
+	width:150%;
+}
+</style>
+</head>
+    <body role="docment">
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/server_manage/">服务器管理系统</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/event_manage/">发布会</a></li>
+            <li><a href="/guest_manage/">嘉宾</a></li>
+            <li><a href="/consumer_manage/">客户</a></li>
+            <li class="active"><a href="#">服务器</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+           <li><a href="#">{{user}}</a></li>
+           <li><a href="/logout/">退出</a></li>
+         </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container theme-showcase" role="main">
+
+      <!--服务器表单-->
+      <div class="row" style="padding-top:80px;">
+        <div id="navbar" class="navbar-collapse collapse">
+           <h1><a>{{ consumer.company }}</a></h1>
+        </div><!--/.navbar-collapse -->
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>序号</th>
+                <th>服务器名称</th>
+                <th>内网IP</th>
+                <th>账号</th>
+                <th>密码</th>
+                <th>操作系统</th>
+                <th>CPU</th>
+                <th>硬盘</th>
+                <th>备注</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for server in servers %}
+                <tr>
+                  <td>{{ server.id }}</td>
+                  <td>{{ server.server_name }}</td>
+                  <td>{{ server.in_ip }}</td>
+                  <td>{{ server.server_account }}</td>
+                  <td>{{ server.server_password }}</td>
+                  <td>{{ server.system }}</td>
+                  <td>{{ server.server_cpu }}</td>
+                  <td>{{ server.server_harddisk }}</td>
+                  <td>{{ server.server_Remark }}</td>
+                </tr>
+             {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      
+    </body>
+
+</html>

@@ -1,0 +1,89 @@
+<html lang="zh-CN">
+  <head>
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <title>Guest Manege</title>
+<style>
+.col-md-6{
+	width:150%;
+}
+</style>
+  </head>
+   
+    <body role="docment">
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/consumer_manage/">客户管理系统</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/event_manage/">发布会</a></li>
+            <li><a href="/guest_manage/">嘉宾</a></li>
+            <li class="active"><a href="#">客户</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+           <li><a href="#">{{user}}</a></li>
+           <li><a href="/logout/">退出</a></li>
+         </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container theme-showcase" role="main">
+
+      <!--客户表单-->
+      <div class="row" style="padding-top:80px;">
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form" method="get" action="/search_consumer/">
+            <div class="form-group">
+              <input name="company" type="text" placeholder="客户名称" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">搜索</button>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>序号</th>
+                <th>客户单位名称</th>
+                <th>客户类型</th>
+                <th>平台版本</th>
+                <th>访问地址</th>
+                <th>管理员登录名</th>
+                <th>管理员密码</th>
+                <th>平台应用</th>
+                <th>客户联系方式</th>
+                <th>备注</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for consumer in consumers %}
+                <tr>
+                  <td>{{ consumer.id }}</td>
+                  <td><a href="/server_manage/{{ consumer.id}}/">{{ consumer.company }}</a></td>
+                  <td>{{ consumer.consumer_type }}</td>
+                  <td>{{ consumer.web_version }}</td>
+                  <td>{{ consumer.url }}</td>
+                  <td>{{ consumer.admin_name }}</td>
+                  <td>{{ consumer.admin_password }}</td>
+                  <td>{{ consumer.apps }}</td>
+                  <td>{{ consumer.contact }}</td>
+                  <td>{{ consumer.counsumer_Remark }}</td>
+                </tr>
+             {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      
+    </body>
+
+</html>
