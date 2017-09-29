@@ -193,10 +193,14 @@ def server_manage(request,consum_id):
 #新增客户平台
 @login_required
 def add_consumer(request):
-    return render(request,"add_consumer.html")
+
+    username = request.session.get('username','')
+    return render(request,"add_consumer.html",{"user":username})
     
     
-    
+def addbutton(request,consumer_name,consumer_type,pl_version,pl_url,adminname,adminpassword,pl_app,consumerContact,consumerRemark):
+    e1=Event(company=consumer_name,consumer_type=consumer_type,web_version=pl_version,url=pl_url,admin_name=adminname,admin_password=adminpassword,apps=pl_app,contact=consumerContact,counsumer_Remark=consumerRemark)
+    e1.save()    
     
     
     

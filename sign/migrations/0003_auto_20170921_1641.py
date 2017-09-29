@@ -19,6 +19,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('in_ip', models.CharField(max_length=100)),
                 ('server_name', models.CharField(max_length=100)),
+                 ('server_account', models.CharField(max_length=100)),
                 ('server_password', models.CharField(max_length=100)),
                 ('system', models.CharField(max_length=100)),
                 ('server_cpu', models.CharField(max_length=100)),
