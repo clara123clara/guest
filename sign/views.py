@@ -190,15 +190,32 @@ def server_manage(request,consum_id):
     username = request.session.get('username','')
     return render(request,"server_manage.html",{"user":username,"servers":server_list,"consumer":consumer})
 
-#新增客户平台
+#跳转新增客户平台
 @login_required
 def add_consumer(request):
 
     username = request.session.get('username','')
     return render(request,"add_consumer.html",{"user":username})
-    
-    
-def addbutton(request,consumer_name,consumer_type,pl_version,pl_url,adminname,adminpassword,pl_app,consumerContact,consumerRemark):
+
+
+#提交表单，新增客户    
+@login_required    
+def add_button(request):
+    if request.methon == 'POST':
+        if uf.is_valid():
+            username = uf.cleaned_data['username']
+            headImg = uf.cleaned_data['headImg']
+                        #user = User()
+                        #user.username = username
+                        #user.headImg = headImg
+                        #user.save()
+            user = User.objects.create(username = username ,headImg = headImg)
+            print username,headImg
+            return HttpResponse('ok')
+        else:
+                uf = UserForm()
+        return render_to_response('index.html',{'uf':uf})    
+    #consumer_name,consumer_type,pl_version,pl_url,adminname,adminpassword,pl_app,consumerContact,consumerRemark):
     e1=Event(company=consumer_name,consumer_type=consumer_type,web_version=pl_version,url=pl_url,admin_name=adminname,admin_password=adminpassword,apps=pl_app,contact=consumerContact,counsumer_Remark=consumerRemark)
     e1.save()    
     

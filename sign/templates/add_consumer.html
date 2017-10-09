@@ -119,8 +119,10 @@
       <div class="row" style="padding-top:80px;">
          <h2>增加客户</h2>
          <form  class="STYLE-NAME" method="post">
-       
+         {% csrf_token %}<!-- 防止伪装提交代码 -->
+ 
                             客户单位名称：<input class="form-control" id="consumer_name",value="",type="text"><br/>
+                            
                            用户类型：<input class="form-control" id="consumer_type",value="",type="text"><br/>
                            平台版本：<input class="form-control" id="pl_version",value="",type="text"><br/>
          URL：<input class="form-control" id="pl_url",value="",type="text"><br/>
@@ -129,15 +131,16 @@
                            应用：<input class="form-control" id="pl_app",value="",type="text"><br/>
                             客户联系方式：<input class="form-control" id="consumerContact",value="",type="text"><br/>
                              备注：<input class="form-control" id="consumerRemark",value="",type="text"><br/>
-                             
+
+          </form>
+               
          <div class="btBtns">
-            <button type="submit" class="btn btn-success">保存</button>
-            <a id="submitBtn" class="greenBtn" url="unitManage/updateUnit.action" href="javascript:;">保存</a>
-            <a id="cacelBtn" class="celadonBtn" href="javascript:;">返回</a>
+            <button type="submit" class="btn btn-success" action="/add_button/">保存</button>
+            <button  class="btn btn-success" action="/return_button/">返回</button>
          </div>
 
                      
-         </form>
+         
          
       </div>
     </div>

@@ -33,4 +33,5 @@ urlpatterns = [
     url(r'^search_consumer/$',views.search_consumer),
     url(r'^server_manage/(?P<consum_id>[0-9]+)/$',views.server_manage),
     url(r'^add_consumer/$',views.add_consumer),
+    url(r'^add_button/$',views.add_button),
 ] 
