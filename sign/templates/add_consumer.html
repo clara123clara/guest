@@ -118,30 +118,23 @@
      <!-- 增加客户信息，提交表单 -->
       <div class="row" style="padding-top:80px;">
          <h2>增加客户</h2>
-         <form  class="STYLE-NAME" method="post">
+         <form  class="STYLE-NAME" method="post" action="/add_button/">
          {% csrf_token %}<!-- 防止伪装提交代码 -->
  
-                            客户单位名称：<input class="form-control" id="consumer_name",value="",type="text"><br/>
+                            客户单位名称：<input class="form-control" name="consumer_name",value="",type="text"><br/>
                             
-                           用户类型：<input class="form-control" id="consumer_type",value="",type="text"><br/>
-                           平台版本：<input class="form-control" id="pl_version",value="",type="text"><br/>
-         URL：<input class="form-control" id="pl_url",value="",type="text"><br/>
-                           管理员登录名：<input class="form-control" id="adminname",value="",type="text"><br/>
-                           管理员密码：<input class="form-control" id="adminpassword",value="",type="text"><br/>
-                           应用：<input class="form-control" id="pl_app",value="",type="text"><br/>
-                            客户联系方式：<input class="form-control" id="consumerContact",value="",type="text"><br/>
-                             备注：<input class="form-control" id="consumerRemark",value="",type="text"><br/>
-
+                           用户类型：<input class="form-control" name="consumer_type",value="",type="text"><br/>
+                           平台版本：<input class="form-control" name="pl_version",value="",type="text"><br/>
+         URL：<input class="form-control" name="pl_url",value="",type="text"><br/>
+                           管理员登录名：<input class="form-control" name="adminname",value="",type="text"><br/>
+                           管理员密码：<input class="form-control" name="adminpassword",value="",type="text"><br/>
+                           应用：<input class="form-control" name="pl_app",value="",type="text"><br/>
+                            客户联系方式：<input class="form-control" name="consumerContact",value="",type="text"><br/>
+                             备注：<input class="form-control" name="consumerRemark",value="",type="text"><br/>
+         <input type="submit" value="提交" class="btn btn-success" >
+         <button  class="btn btn-success" action="/return_button/">返回</button>
           </form>
-               
-         <div class="btBtns">
-            <button type="submit" class="btn btn-success" action="/add_button/">保存</button>
-            <button  class="btn btn-success" action="/return_button/">返回</button>
-         </div>
-
-                     
-         
-         
+                                          
       </div>
     </div>
 

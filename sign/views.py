@@ -1,13 +1,15 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, response
 from sign.models import Event,Guest,Consumer,Server
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import logging
+from sign.forms import AddFrom 
 
 import os,django
 from django.template.context_processors import request
+from django.contrib.messages.context_processors import messages
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "guest.settings")# project_name 项目名称
 django.setup()
 
@@ -195,35 +197,40 @@ def server_manage(request,consum_id):
 def add_consumer(request):
 
     username = request.session.get('username','')
+    print("跳转到增加页面")
     return render(request,"add_consumer.html",{"user":username})
+    
 
 
 #提交表单，新增客户    
 @login_required    
 def add_button(request):
-    if request.methon == 'POST':
-        if uf.is_valid():
-            username = uf.cleaned_data['username']
-            headImg = uf.cleaned_data['headImg']
-                        #user = User()
-                        #user.username = username
-                        #user.headImg = headImg
-                        #user.save()
-            user = User.objects.create(username = username ,headImg = headImg)
-            print username,headImg
-            return HttpResponse('ok')
-        else:
-                uf = UserForm()
-        return render_to_response('index.html',{'uf':uf})    
-    #consumer_name,consumer_type,pl_version,pl_url,adminname,adminpassword,pl_app,consumerContact,consumerRemark):
-    e1=Event(company=consumer_name,consumer_type=consumer_type,web_version=pl_version,url=pl_url,admin_name=adminname,admin_password=adminpassword,apps=pl_app,contact=consumerContact,counsumer_Remark=consumerRemark)
-    e1.save()    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    consumer_list = Consumer.objects.all()
+    username = request.session.get('username', '')
+    print(request.method) 
+    if request.method == 'POST':
+         userform = AddFrom(request.POST)
+                  
+         if userform.is_valid():
+             companyname = userform.cleaned_data['consumer_name']
+             consumer_type = userform.cleaned_data['consumer_type']
+             web_version = userform.cleaned_data['pl_version']
+             url = userform.cleaned_data['pl_url']
+             admin_name = userform.cleaned_data['adminname']
+             admin_password = userform.cleaned_data['adminpassword']
+             apps = userform.cleaned_data['pl_app']
+             contact = userform.cleaned_data['consumerContact']
+             counsumer_Remark = userform.cleaned_data['consumerRemark']
+             
+
+             user = Consumer.objects.create(company = companyname ,consumer_type = consumer_type,web_version=web_version,url=url,admin_name=admin_name,admin_password=admin_password,apps=apps,contact=contact,counsumer_Remark=counsumer_Remark)
+             print("我的提交结果",companyname,consumer_type,web_version)
+             #return HttpResponse('ok')
+             return render(request, "consumer_manage.html", {"user": username, "consumers": consumer_list}) 
+
+         else:
+             return response(AddFrom)
+    return render('add_consumer.html',{})     
+ 
+
+
